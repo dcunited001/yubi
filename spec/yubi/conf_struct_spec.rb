@@ -30,6 +30,8 @@ class FooClass
   end
 end
 
+class SubfooClass < FooClass; end
+
 yaml_file = 'nested_symbolize_keys'
 yaml_data = YAML::load_file(yaml_path(yaml_file)) 
 yaml_data = FooStruct.nested_symbolize_keys(yaml_data)
@@ -66,5 +68,16 @@ describe FooClass do
     FooClass.blk.group1.val1.must_equal 11
     FooClass.blk.group1.must_respond_to :val1
     FooClass.blk.group2.group3.val1.must_equal 231
+  end
+end
+
+describe SubfooClass do
+  it 'should inherit class attributes from FooClass' do
+    SubfooClass.simple.val1.must_equal 1
+    SubfooClass.blk.val1.must_equal 1
+    SubfooClass.blk[:val2].must_equal 2
+    SubfooClass.blk.group1.val1.must_equal 11
+    SubfooClass.blk.group1.must_respond_to :val1
+    SubfooClass.blk.group2.group3.val1.must_equal 231
   end
 end

@@ -24,8 +24,9 @@ describe Yubi::Callbacks::InitBase do
   it 'runs the initialize callbacks' do
     foo.opts.must_equal opts
     foo.bar.must_equal 'a'
-    # for now, can't modify the *args passed to new
-    # test.foo.must_equal 3  
+
+    skip
+    test.foo.must_equal 3
   end
   it 'allows subclasses to inherit the init callbacks' do
     sub.opts.must_equal opts
