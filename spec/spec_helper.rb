@@ -13,10 +13,14 @@ def this
   Yubi
 end
 
+def root_path
+  File.dirname(__FILE__)
+end
+
 def yaml_path(name)
-  File.join('fixtures','yaml',"#{name}.yaml")
+  File.join(root_path, 'fixtures',"#{name}.yaml")
 end
 
 def bin_path(name)
-  File.join('fixtures','yaml',"#{name}.bin")
+  File.join(root_path, 'fixtures',"#{name}.bin")
 end

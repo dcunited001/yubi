@@ -11,6 +11,7 @@ group :development do
   gem 'minitest-matchers'
   gem 'minitest-rg'
   gem 'mocha', '~> 0.11.4' #version necessary?
+  gem 'hashie', git: 'https://github.com/intridea/hashie'
 end
 
 if RbConfig::CONFIG['target_os'] =~ /darwin/i
