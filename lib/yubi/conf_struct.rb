@@ -19,6 +19,7 @@ module Yubi::ConfStruct
             v
           end
         end
+
         def #{name.to_s}=(x)
           modifiable[:#{name.to_s}] = x
         end
@@ -39,7 +40,7 @@ EOS
       if block_given?
         cs = self.class.new(Hash.new).ostruct_eval(&block)
         modifiable[new_ostruct_member(mname)] = cs
-      else 
+      else
         @table[mid]
       end
     elsif len == 1 && (mid != :[])

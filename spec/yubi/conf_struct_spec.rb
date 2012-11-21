@@ -12,6 +12,7 @@ class FooClass
     val2 2
     val3 3
   end
+
   cattr_from_block(:blk, FooStruct.new) do
     val1 1
     val2 2
@@ -19,6 +20,7 @@ class FooClass
       val1 11
       val2 12
     end
+
     group2 do
       val1 21
       val2 22
@@ -44,12 +46,19 @@ describe Yubi::ConfStruct do
     fs.group1.val1.must_equal 11
     fs.group2.val2.must_equal 22
   end
-  it 'can be nested when block received'
+
+  it 'can be nested when block received' do
+    fs.group2.val1 21
+    fs.group2.group3.val1.must_equal 231
+    fs.group2.group3.val1.must_equal 231
+  end
+
   it 'only writes to @table when modifiable' do
     h = {val1: 1}
     fs.expects(:modifiable).returns(h)
     fs.val1 = 'val2'
   end
+
   it 'updates #respond_to?' do
     #update respond_to? or respond_to_missing?
     skip
@@ -62,6 +71,7 @@ describe FooClass do
     FooClass.simple[:val2].must_equal 2
     FooClass.simple.val3.must_equal 3
   end
+
   it 'should have set up attributes from the block for #blk' do
     FooClass.blk.val1.must_equal 1
     FooClass.blk[:val2].must_equal 2
@@ -69,6 +79,7 @@ describe FooClass do
     FooClass.blk.group1.must_respond_to :val1
     FooClass.blk.group2.group3.val1.must_equal 231
   end
+
 end
 
 describe SubfooClass do
